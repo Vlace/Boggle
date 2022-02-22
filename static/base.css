@@ -1,0 +1,16 @@
+.valid{
+    color: green;
+}
+
+.invalid{
+    color: red;
+}
+.used{
+    color: rgb(73, 79, 85);
+}
+#letter_board tr td{
+    border: 2px solid black;
+    font-size: 2rem;
+    align-items: center;
+    padding: 10px
+}
