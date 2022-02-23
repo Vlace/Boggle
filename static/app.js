@@ -12,14 +12,11 @@ let guessAvg = [];
 
 const statsCompiler = function(){
     //Set and update total games played.
-    let gamesPlayed = 1;
+    let gamesPlayed = 0;
     if (localStorage.getItem("gamesPlayed")){
-        gamesPlayed = localStorage.getItem("gamesPlayed") + 1;
+        gamesPlayed = localStorage.getItem("gamesPlayed");        
     }
-    localStorage.setItem("gamesPlayed", gamesPlayed);
-    
-    //updating current score
-    localStorage.setItem("currentScore", score);
+    gamesPlayed = Number(gamesPlayed) + 1;
     
     //Checking and updating highscore, if needed.
     let highScore = 0;
@@ -35,23 +32,38 @@ const statsCompiler = function(){
     let bigWords = 0;
     let storageLetterLength = 0;
     let storageWordCount = 0;
+    let longestWordLength = 0;
+    if(localStorage)
     if (localStorage.getItem("bigWords")){
         bigWords = localStorage.getItem("bigWords");
     }
     if (localStorage.getItem("storageAvg")){
         storageAvg = localStorage.getItem("storageAvg");
     }
-    if (localStorage.getItem("storageAvgLength")){
-        storageAvgLength = localStorage.getItem("storageAvgLength");
+    if (localStorage.getItem("storageLetterLength")){
+        storageLetterLength = localStorage.getItem("storageLetterLength");
+    }
+    if(localStorage.getItem("longestWordLength")){
+        longestWordLength = localStorage.getItem("longestWordLength")
     }
     for (const word of guessSet){
         storageLetterLength += word.length;
         storageWordCount += 1;
+        
         if (word.length >= 5){
             bigWords += 1;
+            
+        }
+        if (word.length > longestWordLength){
+            longestWordLength = word.length;
+            
         }
     }
+    //Setting and updating info for stats page
+    localStorage.setItem("currentScore", score);
+    localStorage.setItem("gamesPlayed", gamesPlayed);
     localStorage.setItem("bigWords", bigWords);
+    localStorage.setItem("longestWordLength", longestWordLength);
     localStorage.setItem("storageLetterLength", storageLetterLength);
     localStorage.setItem("storageWordCount", storageWordCount);
 }

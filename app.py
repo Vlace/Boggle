@@ -10,7 +10,7 @@ init_boggle = Boggle()
 @app.route("/")
 def home():    
     make_board = init_boggle.make_board()
-    session['current_board']= make_board
+    session['current_board'] = make_board
     return render_template('index.html', make_board = make_board)
 
 @app.route("/guess_check")
